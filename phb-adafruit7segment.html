@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    RED.nodes.registerType('phb-adafruit7segment',{
+        category: 'function',
+        color: '#f48120',
+        defaults: {
+            name: {value:""},
+            i2c_bus: {value:1},
+            i2c_address: {value:"0x70"},
+            brightness: {value:10},
+			blink_rate: {value:"0x00"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "debug.png",
+        label: function() {
+            return this.name||"phb-adafruit7segment";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="phb-adafruit7segment">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+	<div class="form-row">
+        <label for="node-input-i2c_bus"><i class="icon-tag"></i> I2C Bus</label>
+        <input type="text" id="node-input-i2c_bus" placeholder="I2C Bus">
+    </div>
+	<div class="form-row">
+        <label for="node-input-i2c_address"><i class="icon-tag"></i> I2C Address</label>
+        <input type="text" id="node-input-i2c_address" placeholder="I2C Address">
+    </div>
+	<div class="form-row">
+        <label for="node-input-brightness"><i class="icon-tag"></i> Brightness</label>
+        <input type="text" id="node-input-brightness" placeholder="Brightness">
+    </div>
+	<div class="form-row">
+        <label for="node-input-blink_rate"><i class="icon-tag"></i> Blink Rate</label>
+        <input type="text" id="node-input-blink_rate" placeholder="Blink Rate">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="phb-adafruit7segment">
+    <p>A node to simplify the usage of a Adafruit 7 Segment I2C system.</p>
+</script>

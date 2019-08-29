@@ -1,0 +1,21 @@
+{
+  "name": "red-contrib-phb-adafruit7segment",
+  "version": "0.0.1",
+  "dependencies": {
+	"debug": "^2.6.8",
+	"eventemitter3": "^2.0.3",
+	"i2c-bus": "^1.2.2"
+  },
+  "description": "A node to simplify the usage of a Adafruit 7 Segment I2C system.",
+  "main": "phb-adafruit7segment.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Richard P. Gonzales",
+  "license": "GPL-3.0-only",
+  "node-red" : {
+        "nodes": {
+            "phb-adafruit7segment": "phb-adafruit7segment.js"
+        }
+    }
+}
