@@ -64,8 +64,7 @@ class LEDBackpack extends EventEmitter {
 						//node.error('unable to complete system startup!!:', err);
 						this.emit('error', err);
 					});
-			}
-			else {
+			} else {
 				this.emit('error', err);
 			}
 		});

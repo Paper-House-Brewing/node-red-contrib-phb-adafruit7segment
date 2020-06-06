@@ -25,15 +25,10 @@ module.exports = function(RED) {
 			'.' : 0x01, /* a */
 			' ' : 0x00  /*   */
 		};
-		
-		// Setup our default
-		display.clear();
-		display.setBrightness(config.brightness);
-		display.setBlinkRate(config.blink_rate);
 
-        node.on('input', function(msg) {
-			// Make sure we have a number 
-			let num = parseFloat(msg.payload);
+		function writeMessage(msg) {
+			// Make sure we have a number
+			let num = parseFloat(msg);
 			// Make sure our parsed value is a number
 			if (isNaN(num)) {
 				node.error("The value provided is not a real number.");
@@ -41,7 +36,7 @@ module.exports = function(RED) {
 			}
 			// Now make sure we have one decimal place and convert back to string
 			let numStr = num.toFixed(1);	// WARNING!! Do not rely on toFixed to round with precision
-			// Setup the padding 
+			// Setup the padding
 			let gap = 4 - numStr.replace('.', '').length;
 			// Clear the display
 			display.clear();
@@ -57,21 +52,36 @@ module.exports = function(RED) {
 				if (gap > 0) {
 					// Print blanks
 					//node.log("Print a blank @ " + i + " Gap:" + gap);
-					display.setBufferBlock(i, 0x00); 
+					display.setBufferBlock(i, 0x00);
 					gap--;
-				} else if (i == 2) {
+				} else if (i === 2) {
 					// Don't show the colon
 					//node.log("Insert 0x00 for no colon to show");
 					display.setBufferBlock(2, 0x00);
 				} else {
 					let _char = numStr.shift(); // Grab the first character to print and remove it from our array
 					//node.log("Try and insert " + _char + " lookup value " + digits[_char] + " @ " + i);
-					display.setBufferBlock(i, digits[_char], i==3 ? true : false); // Print the digit
+					display.setBufferBlock(i, digits[_char], i===3); // Print the digit
 				}
 			}
 			display.writeDisplay();
-            node.send(msg);
-        });
+		}
+
+		// Setup our default
+		display.clear();
+		display.setBrightness(config.brightness);
+		display.setBlinkRate(config.blink_rate);
+
+		// Now a couple of init things
+		writeMessage("888.8");
+		setTimeout(() => {
+			display.clear();
+		}, 2000);
+
+		node.on('input', function(msg) {
+			writeMessage(msg.payload);
+			node.send(msg);
+		});
     }
     RED.nodes.registerType("phb-adafruit7segment",PHB_Adafruit7Segment);
 };
