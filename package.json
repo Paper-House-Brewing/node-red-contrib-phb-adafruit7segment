@@ -1,5 +1,5 @@
 {
-    "name": "red-contrib-phb-adafruit7segment",
+    "name": "node-red-contrib-phb-adafruit7segment",
     "version": "0.0.1",
     "dependencies": {
         "debug": "^2.6.8",
